@@ -37,6 +37,7 @@ int main(){
     second->next =third;
     third->next =fourth;
     fourth->next =fifth;
+    fifth->next =NULL;
 
     print(first);
     
