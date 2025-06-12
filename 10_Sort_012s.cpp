@@ -29,7 +29,7 @@ void sortWithReplacement(Node* head){
     //step 1 count 0 1 2's
     int zero=0 ; 
     int one=0;
-    int two =0;
+    int two=0;
 
     Node* temp =head;
     
@@ -62,6 +62,61 @@ void sortWithReplacement(Node* head){
             temp=temp->next;
         }
     }
+void sortWithoutReplacement(Node* head){
+    //step 1 create dummy nodes 
+    Node* zeroNode = new Node(-1);
+    Node* zeroTail = zeroNode;
+
+    Node* oneNode = new Node(-1);
+    Node* oneTail = oneNode;
+
+    Node* twoNode = new Node(-1);
+    Node* twoTail = twoNode;
+    //step 2
+    Node* curr =head;
+    while(curr!=NULL){
+        if(curr->data == 0){
+            //take out the zero wali node 
+            Node* temp =curr;
+            curr =curr->next;
+            temp->next =NULL;
+            //append the zeroWaliNode LL
+            zeroTail-> next =temp;
+            zeroTail =temp;
+
+        }
+        else if(curr->data == 1){
+             //take out the 1 wali node 
+            Node* temp =curr;
+            curr =curr->next;
+            temp->next =NULL;
+            //append the oneWaliNode LL
+            oneTail-> next =temp;
+            oneTail =temp;
+            
+        }
+        else if(curr->data == 2){
+             //take out the 2 wali node 
+            Node* temp =curr;
+            curr =curr->next;
+            temp->next =NULL;
+            //append the twoWaliNode LL
+            twoTail-> next =temp;
+            twoTail =temp;
+            
+        }
+    }
+    //yaha per 0 1 2 teeno LL ready hai 
+
+    //jointhem 
+    
+
+    //remove dummy
+
+    //return head of the ll
+
+
+}  
 
 int main(){
     Node* head = new Node(1);
@@ -81,9 +136,11 @@ int main(){
 
     print(head);
     cout<<endl;
-    sortWithReplacement(head);
+    // sortWithReplacement(head);
+    // print(head);
+    sortWithoutReplacement(head);
     print(head);
-    
+    cout <<endl;
 
 }
 
