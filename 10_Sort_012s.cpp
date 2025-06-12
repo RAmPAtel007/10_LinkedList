@@ -26,7 +26,7 @@ void print(Node* &head){
     
 }
 void sortWithReplacement(Node* head){
-    //step 1 count 0 1 2's
+    //step 1 find count of 0 1 2's
     int zero=0 ; 
     int one=0;
     int two=0;
@@ -47,7 +47,7 @@ void sortWithReplacement(Node* head){
     }
     //step2 fill 
     temp=head;
-    
+
         //fill zeros
         while(zero--){
             temp->data=0;
@@ -62,8 +62,8 @@ void sortWithReplacement(Node* head){
             temp=temp->next;
         }
     }
-void sortWithoutReplacement(Node* head){
-    //step 1 create dummy nodes 
+Node* sortWithoutReplacement(Node* head){
+    //step 1 create dummy nodes (zeroNode/zeroHead)
     Node* zeroNode = new Node(-1);
     Node* zeroTail = zeroNode;
 
@@ -72,7 +72,7 @@ void sortWithoutReplacement(Node* head){
 
     Node* twoNode = new Node(-1);
     Node* twoTail = twoNode;
-    //step 2
+    //step 2 travese the original ll
     Node* curr =head;
     while(curr!=NULL){
         if(curr->data == 0){
@@ -92,7 +92,7 @@ void sortWithoutReplacement(Node* head){
             temp->next =NULL;
             //append the oneWaliNode LL
             oneTail-> next =temp;
-            oneTail =temp;
+            oneTail = temp;
             
         }
         else if(curr->data == 2){
@@ -108,12 +108,40 @@ void sortWithoutReplacement(Node* head){
     }
     //yaha per 0 1 2 teeno LL ready hai 
 
-    //jointhem 
-    
+    //modify one wali list 
+    Node* temp = oneNode;
+    oneNode =oneNode->next;
+    temp->next=NULL;
+    delete temp;
 
-    //remove dummy
+    //modify two wali list 
+    temp = twoNode;
+    twoNode =twoNode->next;
+    temp->next=NULL;
+    delete temp;
 
-    //return head of the ll
+    //join them 
+    if(oneNode !=NULL){
+        //one wali list is non empty
+        zeroTail ->next = oneNode;
+        if(twoNode !=NULL){
+            oneTail ->next =twoNode;
+        }
+    }
+    else{
+        //one wali list is empty
+        if(twoNode !=NULL){
+            zeroTail->next= twoNode;
+        }
+    }
+    //remove zerohead dummy Node
+    temp = zeroNode;
+    zeroNode = zeroNode->next;
+    temp ->next= NULL;
+    delete temp;
+
+    //return head of the modified ll
+    return zeroNode;
 
 
 }  
