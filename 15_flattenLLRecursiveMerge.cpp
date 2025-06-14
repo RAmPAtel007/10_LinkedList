@@ -40,3 +40,6 @@ class Solution {
         
     }
 };
+
+//note
+// flatten(root->next) utomatically traverses till the last node in the main (horizontal) list using recursion.
